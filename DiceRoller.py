@@ -1,30 +1,31 @@
 import random
 import sys
 
-Response = input("Would you like to roll the dice?: ").lower() 
+roll = "yes"
 
 
+def diceRoll():
+    global rollAgain
+    print("Rolling your dice...")
+    print("You rolled...")
+    print(str(random.randint(1, 6)) + ", " + str(random.randint(1, 6)))
+    rollAgain = input("Would you like to play again?")
 
-def Roll():
-    Dice = random.randint(1,6)
-    print(Dice)
-    return Dice
-    
-    
-    
-def RollAgain():  
-    Reply = input("Would you like to roll again?: ").lower()
-    if Reply == "yes":
-        Dice = Roll()
-    elif Reply == "no":
-        sys.exit()
-    
-  
-if Response == "yes":
-    Roll()
-    while Response == "yes":
-        RollAgain()
-elif Response == "no":
-    sys.exit()
-    
+def reRoll():
+    rollAgain = input("Please enter a correct input. (Yes or no) : ")
+    if rollAgain == "yes" or rollAgain == "y":
+        diceRoll()
+        reRoll()
+    else:
+        print("Exiting...")
 
+if roll == "yes" or roll == "y":
+    diceRoll()
+    while rollAgain == "yes" or rollAgain == "y":
+        diceRoll()
+    else:
+        if rollAgain == "no" or rollAgain == "n":
+            print("Exiting...")
+            sys.exit()
+        else:  
+          reRoll()
